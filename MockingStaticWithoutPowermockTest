@@ -1,0 +1,52 @@
+import bmw.card.essb.test.automation.model.ADFSToken;
+import bmw.card.essb.test.automation.model.AdfsTokenThread;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockedStatic;
+import org.mockito.Mockito;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
+
+import java.io.*;
+
+import static bmw.card.essb.test.automation.model.ADFSToken.*;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.mockStatic;
+
+//@RunWith(PowerMockRunner.class)
+//@PrepareForTest({bmw.card.essb.test.automation.model.AdfsTokenThread.class, ADFSToken.class})
+public class AdfsTokenThreadTest {
+
+
+    @Test
+    public void testTest() {
+
+
+        BufferedReader br = null;
+        try {
+            br = new BufferedReader(new FileReader(new File("I:\\mw-wsproxy-automation\\mw-wsproxy-automation\\src\\test\\resources\\test.csv")));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        try (MockedStatic mocked = mockStatic(AdfsTokenThread.class); MockedStatic mocked2 = mockStatic(ADFSToken.class)) {
+            mocked.when(() -> AdfsTokenThread.fooBar(anyString(), anyString())).thenReturn("");
+            mocked2.when(() -> ADFSToken.getBr2()).thenReturn(br);
+//            assertEquals("bar", Foo.method());
+//            mocked.verify(Foo::method);
+
+            System.out.println("elo");
+            AdfsTokenThread.test();
+        }
+
+
+
+        Assertions.assertTrue(true);
+
+    }
+
+
+}
